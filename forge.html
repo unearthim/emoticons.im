@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>emoticon.im | The Glyph Forge</title>
+    <meta name="description" content="The original text-face anvil. Build, weld, and generate custom emoticons and kaomoji. The creation engine of the unearth.im network.">
+    <meta name="keywords" content="emoticon generator, kaomoji maker, text face builder, ascii art creator, emoticon.im, unearth.im, custom text faces">
+    <meta name="author" content="unearth.im">
+    <meta property="og:title" content="emoticon.im | The Glyph Forge">
+    <meta property="og:description" content="Don't just copy history. Forge it. Build your own text-based expressions.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://emoticon.im">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Chakra+Petch:wght@400;700&family=Courier+Prime:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --magma: #ffaa00;
+            --heat: #ff4800;
+            --cold-steel: #1a1a1a;
+            --dark-steel: #0f0f0f;
+        }
+
+        body {
+            background-color: #050505;
+            background-image: radial-gradient(circle at 50% 0%, #2a1505 0%, #050505 60%);
+            color: var(--magma);
+            font-family: 'Chakra Petch', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .industrial-font {
+            font-family: 'Black Ops One', cursive;
+        }
+
+        .glyph-font {
+            font-family: 'Courier Prime', monospace;
+        }
+
+        /* The Anvil Display */
+        .anvil-display {
+            background: rgba(0,0,0,0.8);
+            border: 2px solid #333;
+            box-shadow: 0 0 20px rgba(255, 69, 0, 0.1) inset;
+            text-shadow: 0 0 10px var(--heat);
+        }
+
+        /* Slot Controls */
+        .slot-btn {
+            background: #111;
+            border: 1px solid #333;
+            color: #555;
+            transition: all 0.1s;
+        }
+        .slot-btn:hover {
+            border-color: var(--magma);
+            color: var(--magma);
+            background: #1a1a1a;
+        }
+        .slot-btn:active {
+            background: var(--magma);
+            color: black;
+        }
+
+        /* The Big Red Button */
+        .strike-btn {
+            background: linear-gradient(180deg, #ff4800 0%, #992b00 100%);
+            box-shadow: 0 4px 0 #551800;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+        .strike-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 0 0 #551800;
+        }
+
+        /* Animations */
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+        .shaking {
+            animation: shake 0.3s;
+            animation-iteration-count: 1;
+        }
+
+        @keyframes spark {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(2); }
+        }
+        
+        .spark-flash {
+            position: absolute;
+            inset: 0;
+            background: white;
+            opacity: 0;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+        .flash-active {
+            animation: spark 0.2s ease-out;
+        }
+
+        /* Scanlines for consistency with Sanctuary */
+        .scanlines {
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.3));
+            background-size: 100% 4px;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 50;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center">
+
+    <div class="scanlines"></div>
+    <div id="flash-overlay" class="spark-flash z-40"></div>
+    
+    <!-- Notification Toast -->
+    <div id="toast-container" class="fixed top-10 z-50 pointer-events-none transition-opacity duration-500 opacity-0">
+        <div class="bg-orange-500 text-black font-bold px-6 py-2 industrial-font text-xl shadow-[0_0_20px_#ff4800]">
+            GLYPH EXTRACTED
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="w-full max-w-7xl p-6 flex justify-between items-end border-b border-orange-900/30 relative z-30">
+        <div>
+            <h1 class="text-4xl md:text-6xl industrial-font tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-orange-400 to-orange-700">
+                EMOTICON<span class="text-white">.IM</span>
+            </h1>
+            <p class="text-xs text-orange-800 tracking-[0.3em] font-bold mt-1">THE GLYPH FORGE</p>
+        </div>
+        <div class="hidden md:block text-right">
+            <p class="text-xs text-orange-900">OPERATIONAL STATUS</p>
+            <p class="text-sm font-bold text-orange-600 animate-pulse">HOT / READY</p>
+        </div>
+    </header>
+
+    <!-- Main Forge -->
+    <main class="flex-grow w-full max-w-4xl p-4 flex flex-col justify-center items-center relative z-30 gap-12">
+
+        <!-- The Anvil (Display) -->
+        <div class="w-full relative group">
+            <div class="absolute -inset-1 bg-gradient-to-r from-orange-600 to-red-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+            <div id="main-display" class="anvil-display relative w-full h-48 md:h-64 flex items-center justify-center text-5xl md:text-7xl lg:text-8xl glyph-font rounded-lg select-all cursor-pointer transition-transform active:scale-[0.99]" onclick="copyGlyph()">
+                <span id="output-text">LOADING...</span>
+            </div>
+            <p class="text-center mt-2 text-xs text-orange-800 tracking-widest uppercase">Click Display to Extract</p>
+        </div>
+
+        <!-- The Controls -->
+        <div class="w-full grid grid-cols-5 gap-2 md:gap-4 select-none">
+            
+            <!-- Labels -->
+            <div class="col-span-5 grid grid-cols-5 text-center text-[10px] md:text-xs text-orange-900 uppercase tracking-widest mb-[-30px]">
+                <span>L.Arm</span>
+                <span>L.Eye</span>
+                <span>Mouth</span>
+                <span>R.Eye</span>
+                <span>R.Arm</span>
+            </div>
+
+            <!-- Slot 1: L Arm -->
+            <div class="flex flex-col gap-2 pt-8">
+                <button class="slot-btn p-2 rounded-t" onclick="cycle(0, 1)">▲</button>
+                <div class="bg-black border border-[#333] h-16 flex items-center justify-center text-xl md:text-2xl glyph-font text-white" id="slot-0"></div>
+                <button class="slot-btn p-2 rounded-b" onclick="cycle(0, -1)">▼</button>
+            </div>
+
+            <!-- Slot 2: L Eye -->
+            <div class="flex flex-col gap-2 pt-8">
+                <button class="slot-btn p-2 rounded-t" onclick="cycle(1, 1)">▲</button>
+                <div class="bg-black border border-[#333] h-16 flex items-center justify-center text-xl md:text-2xl glyph-font text-white" id="slot-1"></div>
+                <button class="slot-btn p-2 rounded-b" onclick="cycle(1, -1)">▼</button>
+            </div>
+
+            <!-- Slot 3: Mouth -->
+            <div class="flex flex-col gap-2 pt-8">
+                <button class="slot-btn p-2 rounded-t" onclick="cycle(2, 1)">▲</button>
+                <div class="bg-black border border-[#333] h-16 flex items-center justify-center text-xl md:text-2xl glyph-font text-white" id="slot-2"></div>
+                <button class="slot-btn p-2 rounded-b" onclick="cycle(2, -1)">▼</button>
+            </div>
+
+            <!-- Slot 4: R Eye -->
+            <div class="flex flex-col gap-2 pt-8">
+                <button class="slot-btn p-2 rounded-t" onclick="cycle(3, 1)">▲</button>
+                <div class="bg-black border border-[#333] h-16 flex items-center justify-center text-xl md:text-2xl glyph-font text-white" id="slot-3"></div>
+                <button class="slot-btn p-2 rounded-b" onclick="cycle(3, -1)">▼</button>
+            </div>
+
+            <!-- Slot 5: R Arm -->
+            <div class="flex flex-col gap-2 pt-8">
+                <button class="slot-btn p-2 rounded-t" onclick="cycle(4, 1)">▲</button>
+                <div class="bg-black border border-[#333] h-16 flex items-center justify-center text-xl md:text-2xl glyph-font text-white" id="slot-4"></div>
+                <button class="slot-btn p-2 rounded-b" onclick="cycle(4, -1)">▼</button>
+            </div>
+        </div>
+
+        <!-- Primary Action -->
+        <button onclick="strikeHammer()" class="strike-btn w-full md:w-auto px-12 py-4 rounded font-bold text-white text-xl md:text-2xl uppercase tracking-widest industrial-font transition-all hover:brightness-110">
+            Strike Hammer
+        </button>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full border-t border-orange-900/30 py-8 mt-auto relative z-30 bg-black">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-xs text-orange-800">
+            <div class="mb-4 md:mb-0 text-center md:text-left">
+                <p>&copy; 2025 Emoticon.im. Forged in fire.</p>
+                <p class="mt-1 text-orange-900">looking for the archives? <a href="https://emoticons.im" class="text-green-700 hover:text-green-500 underline decoration-dotted">visit the sanctuary</a>.</p>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span>Part of the Brand Foundry</span>
+                <a href="https://unearth.im" target="_blank" class="text-orange-600 hover:text-orange-400 transition-colors uppercase font-bold tracking-wider">
+                    [ unearth.im ]
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- The Parts Bin ---
+        // Organized to mix and match reasonably well
+        const parts = [
+            // Slot 0: Left Arm / Bracket
+            ['', '(', '[', '{', 'ʕ', 'ᕦ', 'ᕙ', 'ヽ', '༼', 'く', '╰', 'щ', 'ᕕ', '(=', '( ◡́'],
+            
+            // Slot 1: Left Eye
+            ['•', '°', 'ಠ', 'T', '>', '¬', 'o', '^', '─', '´', '✧', '♥', 'Q', 'O', 'x', '▼', '●', 'Φ', '◕'],
+            
+            // Slot 2: Mouth
+            ['_', '.', 'ω', '∀', 'Д', '︿', '▽', 'o', 'ε', '///', '□', 'w', '▂', '人', 'ヮ', 'ᴥ'],
+            
+            // Slot 3: Right Eye
+            ['•', '°', 'ಠ', 'T', '<', '¬', 'o', '^', '─', '`', '✧', '♥', 'Q', 'O', 'x', '▼', '●', 'Φ', '◕'],
+            
+            // Slot 4: Right Arm / Bracket
+            ['', ')', ']', '}', 'ʔ', 'ᕤ', 'ᕗ', 'ﾉ', '༽', 'ミ', '╯', 'щ', 'ᕗ', '=)', '◡̀)']
+        ];
+
+        // State
+        let currentIndices = [1, 0, 0, 0, 1]; // Default selection
+
+        function init() {
+            // Set random start
+            randomize();
+            updateDisplay();
+        }
+
+        function cycle(slotIndex, direction) {
+            let newIndex = currentIndices[slotIndex] + direction;
+            
+            // Wrap around
+            if (newIndex >= parts[slotIndex].length) newIndex = 0;
+            if (newIndex < 0) newIndex = parts[slotIndex].length - 1;
+            
+            currentIndices[slotIndex] = newIndex;
+            updateDisplay();
+        }
+
+        function randomize() {
+            for (let i = 0; i < parts.length; i++) {
+                currentIndices[i] = Math.floor(Math.random() * parts[i].length);
+            }
+        }
+
+        function strikeHammer() {
+            // Visual FX
+            const display = document.getElementById('main-display');
+            const flash = document.getElementById('flash-overlay');
+            
+            // Shake
+            display.classList.remove('shaking');
+            void display.offsetWidth; // trigger reflow
+            display.classList.add('shaking');
+            
+            // Flash
+            flash.classList.remove('flash-active');
+            void flash.offsetWidth;
+            flash.classList.add('flash-active');
+
+            // Logic
+            randomize();
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            let combined = "";
+            for (let i = 0; i < 5; i++) {
+                // Update the slot text
+                const char = parts[i][currentIndices[i]];
+                document.getElementById(`slot-${i}`).innerText = char === '' ? ' ' : char;
+                
+                // Build full string
+                combined += char;
+            }
+            
+            // Extra formatting logic to make it look nicer
+            // Add spaces if it's a "face in brackets" style, e.g. ( ^_^ ) vs (^__^)
+            // But raw concat is more "industrial" and funny. Let's stick to raw concat for the forge.
+            
+            document.getElementById('output-text').innerText = combined;
+        }
+
+        function copyGlyph() {
+            const text = document.getElementById('output-text').innerText;
+            
+            // Try Modern Clipboard API first
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text)
+                    .then(showToast)
+                    .catch(err => {
+                        console.warn('Clipboard API failed, using fallback', err);
+                        fallbackCopy(text);
+                    });
+            } else {
+                fallbackCopy(text);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-9999px';
+            textArea.style.top = '0';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showToast();
+                } else {
+                    console.error('Fallback copy failed.');
+                }
+            } catch (err) {
+                console.error('Fallback: Oops, unable to copy', err);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast-container');
+            toast.style.opacity = '1';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 1500);
+        }
+
+        // Boot
+        document.addEventListener('DOMContentLoaded', init);
+
+    </script>
+</body>
+</html>
