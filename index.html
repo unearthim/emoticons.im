@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- === 1. Primary Meta Tags === -->
+    <title>emoticons.im | The Original Digital Language</title>
+    <meta name="title" content="emoticons.im | The Original Digital Language">
+    <meta name="description" content="A digital monument to the emoticon. Explore, preserve, and use the hand-built expressions of the early web. Curated by unearth.im.">
+    <meta name="keywords" content="emoticons, kaomoji, text faces, ascii art, digital monument, unearth.im, retro web, copy paste emoticons, western emoticons, japanese emoticons">
+    <meta name="author" content="emoticons.im (by unearth heritage foundry - archive & anvil - unearth.im)">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+    
+    <!-- === 2. Canonical Link === -->
+    <link rel="canonical" href="https://emoticons.im/" />
+    
+    <!-- === 3. Webmention Endpoint === -->
+    <link rel="webmention" href="https://webmention.io/unearth.im/webmention" />
+
+    <!-- === 4. Open Graph / Facebook === -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://emoticons.im/">
+    <meta property="og:title" content="emoticons.im | The Original Digital Language">
+    <meta property="og:description" content="A digital monument to the emoticon. Explore, preserve, and use the hand-built expressions of the early web.">
+    <meta property="og:image" content="https://emoticons.im/og-image.png">
+    <meta property="og:site_name" content="emoticons.im">
+
+    <!-- === 5. Twitter Card === -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://emoticons.im/">
+    <meta property="twitter:title" content="emoticons.im | The Original Digital Language">
+    <meta property="twitter:description" content="A digital monument to the emoticon. Explore, preserve, and use the hand-built expressions of the early web.">
+    <meta property="twitter:image" content="https://emoticons.im/og-image.png">
+
+    <!-- === 6. Favicons === -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="alternate icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <!-- === 7. Brand Color Meta Tags === -->
+    <meta name="theme-color" content="#39ff14">
+    <meta name="msapplication-TileColor" content="#050505">
+
+    <!-- === 8. Schema.org Structured Data === -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "VisualArtwork",
+          "@id": "https://emoticons.im/#artwork",
+          "url": "https://emoticons.im/",
+          "name": "emoticons.im | The Original Digital Language",
+          "description": "A digital monument to the emoticon. Explore, preserve, and use the hand-built expressions of the early web.",
+          "inLanguage": "en-US",
+          "artform": "Digital Monument",
+          "artMedium": ["HTML", "CSS", "JavaScript", "Unicode Text"],
+          "artworkSurface": "Web Browser",
+          "dateCreated": "2024-12-01",
+          "datePublished": "2024-12-01",
+          "creator": [
+            { "@id": "https://josiest.com/#person" },
+            { "@id": "https://felixvelas.co/#person" }
+          ],
+          "publisher": { "@id": "https://unearth.im/#organization" },
+          "isPartOf": { "@id": "https://emoticons.im/#website" },
+          "genre": "Interactive Digital Archive",
+          "material": "Digital Code",
+          "keywords": ["emoticons", "kaomoji", "ascii art", "digital preservation", "web monument"]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://emoticons.im/#website",
+          "url": "https://emoticons.im",
+          "name": "emoticons.im",
+          "publisher": { "@id": "https://unearth.im/#organization" }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://unearth.im/#organization",
+          "name": "Unearth Heritage Foundry",
+          "alternateName": ["Unearth Foundry", "Archive & Anvil"],
+          "url": "https://unearth.im",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://unearth.im/favicon-32x32.png"
+          },
+          "foundingDate": "2024",
+          "sameAs": [
+            "https://twitter.com/unearthim",
+            "https://github.com/unearthim"
+          ]
+        },
+        {
+          "@type": "Person",
+          "@id": "https://josiest.com/#person",
+          "name": "Josie Jefferson",
+          "url": "https://josiest.com",
+          "jobTitle": "Digital Archaeologist & Trust Architect",
+          "affiliation": { "@id": "https://unearth.im/#organization" },
+          "sameAs": ["https://notjojo.im"]
+        },
+        {
+          "@type": "Person",
+          "@id": "https://felixvelas.co/#person",
+          "name": "Felix Velasco",
+          "url": "https://felixvelas.co",
+          "jobTitle": "Trust Architect & Digital Archaeologist",
+          "affiliation": { "@id": "https://unearth.im/#organization" },
+          "sameAs": ["https://www.linkedin.com/in/felix-velasco-b793015"]
+        }
+      ]
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --phosphor-main: #39ff14; /* Neon Green */
+            --phosphor-dim: #1b5e20;
+            --bg-dark: #050505;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--phosphor-main);
+            font-family: 'Space Mono', monospace;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        /* CRT Power On Effect - Adjusted to Green (No Flash) */
+        .power-on {
+            animation: powerOn 1.5s ease-out forwards;
+            background-color: #000;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        @keyframes powerOn {
+            0% { transform: scaleY(0.005) scaleX(0); background: var(--phosphor-main); opacity: 1; }
+            40% { transform: scaleY(0.005) scaleX(1); background: var(--phosphor-main); opacity: 1; }
+            70% { transform: scaleY(1) scaleX(1); background: var(--phosphor-main); opacity: 0.1; }
+            100% { transform: scaleY(1) scaleX(1); background: transparent; opacity: 0; }
+        }
+
+        /* CRT Scanline Effect */
+        .scanlines {
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0,0,0,0.2) 50%,
+                rgba(0,0,0,0.2)
+            );
+            background-size: 100% 4px;
+            position: fixed;
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            bottom: 0;
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        /* CRT Flicker */
+        .flicker {
+            animation: flicker 0.15s infinite;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.97; }
+            5% { opacity: 0.95; }
+            10% { opacity: 0.9; }
+            15% { opacity: 0.95; }
+            20% { opacity: 0.99; }
+            50% { opacity: 0.95; }
+            80% { opacity: 0.9; }
+            100% { opacity: 0.97; }
+        }
+
+        .pixel-font {
+            font-family: 'VT323', monospace;
+        }
+
+        /* Emoticon Card Hover Effects */
+        .emo-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #1a2e1a;
+        }
+        
+        .emo-card:hover {
+            background-color: rgba(57, 255, 20, 0.1);
+            border-color: var(--phosphor-main);
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .emo-card:active {
+            transform: scale(0.98);
+        }
+        
+        /* Input Styling */
+        .retro-input {
+            background: rgba(0,0,0,0.8);
+            border: 1px solid var(--phosphor-dim);
+            color: var(--phosphor-main);
+            outline: none;
+            font-family: 'VT323', monospace;
+        }
+        .retro-input:focus {
+            border-color: var(--phosphor-main);
+            box-shadow: 0 0 8px rgba(57, 255, 20, 0.3);
+        }
+        
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #000; 
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #1b5e20; 
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #39ff14; 
+        }
+
+        /* Copy Notification Animation */
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translate(-50%, 0); }
+            100% { opacity: 0; transform: translate(-50%, -40px); }
+        }
+        .copy-anim {
+            animation: floatUp 1s ease-out forwards;
+        }
+        
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Hide logic */
+        .hidden-item { display: none !important; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative selection:bg-green-900 selection:text-green-100">
+
+    <!-- Startup Sequence -->
+    <div class="power-on"></div>
+
+    <!-- CRT Overlay -->
+    <div class="scanlines"></div>
+    <div class="fixed inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_#000000_120%)] pointer-events-none z-40"></div>
+
+    <!-- Notification Container -->
+    <div id="toast-container" class="fixed inset-0 pointer-events-none z-50 overflow-hidden"></div>
+
+    <!-- Navigation / Header -->
+    <header class="w-full border-b border-green-900/50 backdrop-blur-sm relative z-30 p-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-end">
+            <div>
+                <h1 class="text-5xl md:text-7xl pixel-font leading-none tracking-tight flicker">
+                    emoticons<span class="text-green-700">.im</span>
+                </h1>
+                <p class="text-xs md:text-sm text-green-600 mt-2 tracking-widest uppercase">
+                    Archive // ID: 001 // Status: Preservation
+                </p>
+            </div>
+            <div class="hidden md:block text-right">
+                <p class="text-xs text-green-800">EST. 2025</p>
+                <p class="text-sm font-bold">THE GLYPH SANCTUARY</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col md:flex-row relative z-30 max-w-7xl mx-auto w-full p-4 md:p-6 gap-8">
+        
+        <!-- Sidebar: Tools & Categories -->
+        <aside class="w-full md:w-64 flex-shrink-0">
+            <div class="sticky top-8 space-y-8">
+                
+                <!-- Search Module -->
+                <div>
+                    <label class="text-xs text-green-600 uppercase tracking-widest block mb-2 font-bold">[ QUERY PROTOCOL ]</label>
+                    <input type="text" id="search-input" placeholder="> Search artifacts..." class="retro-input w-full p-2 text-xl rounded placeholder-green-900/50">
+                </div>
+
+                <!-- Collections Nav -->
+                <div>
+                    <h2 class="text-xl font-bold mb-4 border-b border-green-800 pb-2">Collections</h2>
+                    <nav class="space-y-2 h-[30vh] overflow-y-auto custom-scrollbar pr-2" id="category-nav">
+                        <!-- Nav items injected by JS -->
+                    </nav>
+                </div>
+
+                <!-- Extraction Log -->
+                <div id="extraction-log-container" class="hidden">
+                    <h2 class="text-xs font-bold mb-2 text-green-600 uppercase tracking-widest border-b border-green-800 pb-1">Recent Extractions</h2>
+                    <div id="extraction-log" class="space-y-2 text-sm font-mono opacity-80">
+                        <!-- Log items go here -->
+                    </div>
+                </div>
+
+                <!-- Manifesto -->
+                <div class="p-4 border border-green-900 bg-green-900/10 rounded">
+                    <h3 class="text-sm font-bold mb-2 text-green-400">MANIFESTO</h3>
+                    <p class="text-xs text-green-600 leading-relaxed">
+                        Before the yellow circles, we carved feelings into the screen using punctuation. <br><br>
+                        This is a monument to the hand-built expression.
+                    </p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Gallery Grid -->
+        <div class="flex-grow">
+            <!-- Featured / Randomizer -->
+            <div id="hero-section" class="mb-12 p-12 border border-green-700 bg-black relative overflow-hidden group">
+                <div class="absolute inset-0 bg-green-900/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+                <div class="text-center">
+                    <p class="text-xs text-green-800 mb-4 uppercase tracking-widest font-bold opacity-50">/// Artifact Rotation ///</p>
+                    <div id="hero-emoticon" class="text-6xl md:text-8xl py-6 font-bold break-all transition-all duration-300 w-full select-none hover:text-white/90 active:scale-95" onclick="copyHero()">
+                        (Wait)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div id="content-area" class="space-y-24 min-h-[50vh]">
+                <!-- Sections injected by JS -->
+                <div id="no-results" class="hidden text-center py-20 opacity-50">
+                    <p class="text-2xl pixel-font">> ERROR: ARTIFACT_NOT_FOUND</p>
+                    <p class="text-sm mt-2">Try adjusting your query parameters.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-green-900/50 py-8 mt-12 relative z-30">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-xs text-green-700">
+            <div class="mb-4 md:mb-0">
+                &copy; 2025 Emoticons.im. All keystrokes reserved.
+            </div>
+            <div class="flex items-center space-x-4">
+                <span>Unearth Heritage Foundry</span>
+                <a href="https://unearth.im" target="_blank" class="text-green-500 hover:text-green-300 transition-colors uppercase font-bold tracking-wider">
+                    [ unearth.im ]
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Database of Emoticons
+        const categories = [
+            {
+                id: 'classics',
+                name: 'The Classics',
+                description: 'The ancestors. Rotated 90 degrees.',
+                items: [
+                    ':-)', ':-D', '8-)', ':-|', ':-(', 
+                    ';-)', ':-O', ':-P', ':-/', 'B-)',
+                    ':-[', ':-*', ":'-(", '>:-(', 'O:-)',
+                    '<3', '</3', 'xD', ':3', '^_^',
+                    'T_T', 'O_O', 'X_X', '._.', '>_<',
+                    '=_=', '-_-', 'o.O', 'O.o', 'x_x'
+                ]
+            },
+            {
+                id: 'joy',
+                name: 'Pure Joy',
+                description: 'Radiating vertical happiness.',
+                items: [
+                    '(*^ω^)', '(´∀`)', 'ヽ(o^ ^o)ﾉ', '(o^▽^o)',
+                    '(✯◡✯)', '(☆ω☆)', 'ヽ(・∀・)ﾉ', '( ˙꒳​˙ )',
+                    '(´｡• ᵕ •｡`)', '╰(▔∀▔)╯', '(⌒‿⌒)', '(◕‿◕)',
+                    '(*≧ω≦)', '(o_ _)ﾉ彡☆', '(¬‿¬)', '(´｡• ᵕ •｡`)',
+                    'ヽ(>∀<☆)ノ', 'o(≧▽≦)o', '(っ˘ω˘ς )', '＼(≧▽≦)／'
+                ]
+            },
+            {
+                id: 'love',
+                name: 'Love & Affection',
+                description: 'Digital warmth.',
+                items: [
+                    '(｡♥‿♥｡)', '(♥_♥)', '(づ｡◕‿‿◕｡)づ', '(っ˘з(˘⌣˘ )',
+                    '♡( ◡‿◡ )', '( ˘⌣˘)♡(˘⌣˘ )', 'σ(≧ε≦σ) ♡',
+                    '( ˘ ³˘)♥', '(´ε｀ )', '(♡-_-♡)', '( ˙꒳​˙ )♡',
+                    '(´｡• ᵕ •｡`) ♡', '(*♡∀♡)', '(｡・//ε//・｡)',
+                    '⊂(・﹏・⊂)'
+                ]
+            },
+            {
+                id: 'shrugs',
+                name: 'The Shrugs',
+                description: 'For when words fail and shoulders rise.',
+                items: [
+                    '¯\\_(ツ)_/¯', '¯\\(°_o)/¯', '┐(‘～` )┌', 
+                    '┐( ˘_˘)┌', '╮( ┘_└ )╭', '┐( ˘ ､ ˘ )┌',
+                    '¯\\_(¬_¬)_/¯', '¯\\_(⊙_ʖ⊙)_/¯', 'ʅ(́◡` )ʃ',
+                    '┐(￣ヘ￣)┌', '╮(︶▽︶)╭', '¯\\(◉◡◔)/¯'
+                ]
+            },
+            {
+                id: 'table-flip',
+                name: 'Rage & Destruction',
+                description: 'Disrespect your surroundings.',
+                items: [
+                    '(╯°□°)╯︵ ┻━┻', '(ノಠ益ಠ)ノ彡┻━┻', '┻━┻ ︵ ヽ(°□°ヽ)',
+                    '(┛◉Д◉)┛彡┻━┻', '(╯°Dv°)╯︵ ┻━┻', '┬─┬ノ( º _ ºノ)',
+                    '(╯°□°)╯︵ ʞooqǝɔɐℲ', '┻━┻ ︵ ¯\\(ツ)/¯ ︵ ┻━┻',
+                    'ಠ_ಠ', '(Egads)', '(¬_¬)', '凸(｀0´)凸',
+                    '(╬ Ò﹏Ó)', '( ≧Д≦)', '(＃`Д´)', '(;¬_¬)'
+                ]
+            },
+            {
+                id: 'vibes',
+                name: 'The Vibes & Lennys',
+                description: 'That specific internet energy.',
+                items: [
+                    '( ͡° ͜ʖ ͡°)', '( ˘ ɜ˘) ♬♪♫', 'uwu', 'owo',
+                    '(－‸ლ)', '(;´༎ຶٹ༎ຶ`)', '•_•', 
+                    '(•_•) ( •_•)>⌐■-■ (⌐■_■)',
+                    '( ͡~ ͜ʖ ͡°)', '( ͡ʘ ͜ʖ ͡ʘ)', '( ಠ ͜ʖಠ)',
+                    'ᕦ( ͡° ͜ʖ ͡°)ᕤ', '( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)'
+                ]
+            },
+            {
+                id: 'animals',
+                name: 'Fauna',
+                description: 'Digital biodiversity.',
+                items: [
+                    '(^._.^)ﾉ', '/ᐠ｡ꞈ｡ᐟ\\', '(=^･ω･^=)', 'ʕ •ᴥ• ʔ',
+                    'ʕ ᵔᴥᵔ ʔ', '(V) (;,,;) (V)', 'くコ:彡', 'Flightless Bird',
+                    '(uxu)', 'U・ᴥ・U', '(ᵔᴥᵔ)', 'ᶘ ᵒᴥᵒᶅ',
+                    '(=^-ω-^=)', '(ㅇㅅㅇ❀)', 'V●ᴥ●V', '(=ｘェｘ=)'
+                ]
+            },
+            {
+                id: 'combat',
+                name: 'Combat & Magic',
+                description: 'It is dangerous to go alone.',
+                items: [
+                    '(∩^o^)⊃━☆', '(∩｀-´)⊃━☆ﾟ.*･｡ﾟ', 'o()xxxx[{::::::::::::::::::>',
+                    'Q(`⌒´Q)', '(ง\'̀-\'́)ง', '̿ ̿ ̿\'̿\'\\̵͇̿̿\\з=( ͠° ͟ʖ ͡°)=ε/̵͇̿̿/\'̿\'̿ ̿',
+                    '(*・_・)ノ⌒*', '(x_x)⌒☆', '୧((#Φ益Φ#))୨',
+                    'ᕙ(⇀‸↼‶)ᕗ', '( ◡́.◡̀)(^◡^ )', '(*￣(ｴ)￣*)'
+                ]
+            },
+            {
+                id: 'dread',
+                name: 'Fear & Dread',
+                description: 'The void stares back.',
+                items: [
+                    '(O_O)', '(OoO)', '(>_<)', '(;;;*_*)',
+                    '(°ロ°) !', '(⊙_⊙)', '(((( ;°Д°))))',
+                    '(＃￣0￣)', '(꒪ཀ꒪)', '༼ つ ◕_◕ ༽つ',
+                    '(⁄ ⁄•⁄ω⁄•⁄ ⁄)', '(ノωヽ)', '(/_\\)'
+                ]
+            }
+        ];
+
+        // Initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            renderNav();
+            renderContent();
+            setHeroEmoticon();
+            initSearch();
+            
+            // Randomly update hero every 5 seconds
+            setInterval(setHeroEmoticon, 5000);
+        });
+
+        function renderNav() {
+            const nav = document.getElementById('category-nav');
+            categories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = 'block w-full text-left px-2 py-1.5 text-sm text-green-700 hover:text-green-300 hover:bg-green-900/30 rounded transition-colors pixel-font uppercase tracking-wide';
+                btn.innerText = `> ${cat.name}`;
+                btn.onclick = () => {
+                    document.getElementById(cat.id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+                };
+                nav.appendChild(btn);
+            });
+        }
+
+        function renderContent() {
+            const container = document.getElementById('content-area');
+            
+            categories.forEach(cat => {
+                const section = document.createElement('section');
+                section.id = cat.id;
+                section.className = 'artifact-section'; // for search filtering
+                
+                // Header
+                const header = document.createElement('div');
+                header.className = 'mb-6 sticky top-0 bg-black/80 backdrop-blur-md py-4 z-20 border-b border-green-900/30';
+                header.innerHTML = `
+                    <h2 class="text-3xl font-bold pixel-font text-green-400 mb-1">${cat.name}</h2>
+                    <p class="text-sm text-green-800 font-mono">// ${cat.description}</p>
+                `;
+                section.appendChild(header);
+
+                // Grid
+                const grid = document.createElement('div');
+                grid.className = 'grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4';
+                
+                cat.items.forEach(emo => {
+                    const card = document.createElement('button');
+                    card.className = 'emo-card p-4 rounded bg-black flex items-center justify-center min-h-[80px] text-lg md:text-xl text-center relative overflow-hidden group searchable-item';
+                    card.setAttribute('aria-label', 'Copy emoticon');
+                    card.setAttribute('data-content', emo.toLowerCase()); // for search
+                    
+                    // The text - SAFE RENDERING
+                    const span = document.createElement('span');
+                    span.className = 'relative z-10 break-all';
+                    span.textContent = emo;
+                    
+                    card.appendChild(span);
+                    
+                    // Click Event
+                    card.onclick = (e) => copyToClipboard(emo, e);
+                    
+                    grid.appendChild(card);
+                });
+
+                section.appendChild(grid);
+                container.appendChild(section);
+            });
+        }
+
+        function setHeroEmoticon() {
+            const allEmoticons = categories.flatMap(c => c.items);
+            const random = allEmoticons[Math.floor(Math.random() * allEmoticons.length)];
+            const hero = document.getElementById('hero-emoticon');
+            
+            // Glitch effect before changing
+            hero.style.opacity = 0.5;
+            setTimeout(() => {
+                hero.innerText = random;
+                hero.style.opacity = 1;
+            }, 100);
+        }
+
+        function copyHero() {
+            const text = document.getElementById('hero-emoticon').innerText;
+            // Fake an event object for the center of the screen
+            const mockEvent = { clientX: window.innerWidth / 2, clientY: window.innerHeight / 2 };
+            copyToClipboard(text, mockEvent, true);
+        }
+
+        // --- SEARCH PROTOCOL ---
+        function initSearch() {
+            const input = document.getElementById('search-input');
+            const noResults = document.getElementById('no-results');
+            
+            input.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                const items = document.querySelectorAll('.searchable-item');
+                const sections = document.querySelectorAll('.artifact-section');
+                let foundAny = false;
+
+                // 1. Filter Items
+                items.forEach(item => {
+                    const content = item.getAttribute('data-content');
+                    if (content.includes(query)) {
+                        item.classList.remove('hidden-item');
+                        foundAny = true;
+                    } else {
+                        item.classList.add('hidden-item');
+                    }
+                });
+
+                // 2. Hide Empty Sections
+                sections.forEach(section => {
+                    const visibleItems = section.querySelectorAll('.searchable-item:not(.hidden-item)');
+                    if (visibleItems.length === 0) {
+                        section.classList.add('hidden-item');
+                    } else {
+                        section.classList.remove('hidden-item');
+                    }
+                });
+                
+                // 3. Toggle No Results / Hero
+                if (!foundAny) {
+                    noResults.classList.remove('hidden');
+                    document.getElementById('hero-section').classList.add('hidden-item');
+                } else {
+                    noResults.classList.add('hidden');
+                    // Only show hero if query is empty
+                    if (query.length > 0) {
+                         document.getElementById('hero-section').classList.add('hidden-item');
+                    } else {
+                         document.getElementById('hero-section').classList.remove('hidden-item');
+                    }
+                }
+            });
+        }
+
+        // --- CLIPBOARD & LOGGING ---
+        async function copyToClipboard(text, event, isHero = false) {
+            // Attempt Modern Clipboard API first
+            if (navigator.clipboard && window.isSecureContext) {
+                try {
+                    await navigator.clipboard.writeText(text);
+                    handleCopySuccess(text, event, isHero);
+                    return;
+                } catch (err) {
+                    console.warn('Clipboard API failed, falling back to legacy execution', err);
+                }
+            }
+
+            // Fallback
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-9999px';
+            textArea.style.top = '0';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    handleCopySuccess(text, event, isHero);
+                }
+            } catch (err) {
+                console.error('Fallback: Oops, unable to copy', err);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function handleCopySuccess(text, event, isHero) {
+            showToast(text, event, isHero);
+            addToLog(text);
+        }
+
+        function addToLog(text) {
+            const container = document.getElementById('extraction-log-container');
+            const log = document.getElementById('extraction-log');
+            
+            container.classList.remove('hidden');
+            
+            const entry = document.createElement('div');
+            const time = new Date().toLocaleTimeString([], { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit" });
+            entry.innerHTML = `<span class="text-green-800">[${time}]</span> <span class="text-green-400">${text}</span>`;
+            entry.className = "border-l-2 border-green-900 pl-2 hover:bg-green-900/20 transition-colors cursor-default";
+            
+            // Add to top
+            log.prepend(entry);
+            
+            // Keep max 5
+            if (log.children.length > 5) {
+                log.removeChild(log.lastChild);
+            }
+        }
+
+        function showToast(text, e, isHero) {
+            const container = document.getElementById('toast-container');
+            container.innerHTML = '';
+            
+            const toast = document.createElement('div');
+            const messages = ['ACQUIRED', 'COPIED', 'STORED', 'CAPTURED'];
+            const msg = messages[Math.floor(Math.random() * messages.length)];
+
+            toast.className = 'bg-green-500 text-black font-bold px-4 py-2 rounded shadow-[0_0_15px_rgba(57,255,20,0.8)] pixel-font text-xl copy-anim whitespace-nowrap absolute';
+            toast.innerText = `${msg}: ${text}`;
+            
+            if (!isHero && e && e.clientX && e.clientY) {
+                let top = e.clientY - 40;
+                let left = e.clientX;
+                toast.style.top = `${top}px`;
+                toast.style.left = `${left}px`;
+                toast.style.transform = 'translateX(-50%)';
+            } else {
+                toast.style.top = '50%';
+                toast.style.left = '50%';
+                toast.style.transform = 'translate(-50%, -50%)';
+            }
+
+            container.appendChild(toast);
+            setTimeout(() => {
+                if (toast.parentNode === container) {
+                    toast.remove();
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
